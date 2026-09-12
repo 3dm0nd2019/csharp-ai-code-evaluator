@@ -1,5 +1,5 @@
 using NUnit.Framework;
-using System; 
+using System;
 
 public class Challenge01CandidateBTests
 {
@@ -10,8 +10,8 @@ public class Challenge01CandidateBTests
 
         player.AddXP(99);
 
-        Assert.AreEqual(1, player.Level);
-        Assert.AreEqual(99, player.XP);
+        Assert.That(player.Level, Is.EqualTo(1));
+        Assert.That(player.XP, Is.EqualTo(99));
     }
 
     [Test]
@@ -21,8 +21,8 @@ public class Challenge01CandidateBTests
 
         player.AddXP(100);
 
-        Assert.AreEqual(2, player.Level);
-        Assert.AreEqual(0, player.XP);
+        Assert.That(player.Level, Is.EqualTo(2));
+        Assert.That(player.XP, Is.EqualTo(0));
     }
 
     [Test]
@@ -32,8 +32,8 @@ public class Challenge01CandidateBTests
 
         player.AddXP(101);
 
-        Assert.AreEqual(2, player.Level);
-        Assert.AreEqual(1, player.XP);
+        Assert.That(player.Level, Is.EqualTo(2));
+        Assert.That(player.XP, Is.EqualTo(1));
     }
 
     [Test]
@@ -43,8 +43,8 @@ public class Challenge01CandidateBTests
 
         player.AddXP(250);
 
-        Assert.AreEqual(3, player.Level);
-        Assert.AreEqual(0, player.XP);
+        Assert.That(player.Level, Is.EqualTo(3));
+        Assert.That(player.XP, Is.EqualTo(0));
     }
 
     [Test]
@@ -54,8 +54,8 @@ public class Challenge01CandidateBTests
 
         player.AddXP(450);
 
-        Assert.AreEqual(4, player.Level);
-        Assert.AreEqual(0, player.XP);
+        Assert.That(player.Level, Is.EqualTo(4));
+        Assert.That(player.XP, Is.EqualTo(0));
     }
 
     [Test]
@@ -63,6 +63,8 @@ public class Challenge01CandidateBTests
     {
         var player = new PlayerProgressionB();
 
-        Assert.Throws<ArgumentOutOfRangeException>(() => player.AddXP(-10));
+        Assert.That(
+            () => player.AddXP(-10),
+            Throws.TypeOf<ArgumentOutOfRangeException>());
     }
 }
