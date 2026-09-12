@@ -8,8 +8,8 @@ public class Challenge01ReferenceTests
     {
         var player = new PlayerProgressionReference();
 
-        Assert.AreEqual(1, player.Level);
-        Assert.AreEqual(0, player.XP);
+        Assert.That(player.Level, Is.EqualTo(1));
+        Assert.That(player.XP, Is.EqualTo(0));
     }
 
     [Test]
@@ -19,8 +19,8 @@ public class Challenge01ReferenceTests
 
         player.AddXP(99);
 
-        Assert.AreEqual(1, player.Level);
-        Assert.AreEqual(99, player.XP);
+        Assert.That(player.Level, Is.EqualTo(1));
+        Assert.That(player.XP, Is.EqualTo(99));
     }
 
     [Test]
@@ -30,8 +30,8 @@ public class Challenge01ReferenceTests
 
         player.AddXP(100);
 
-        Assert.AreEqual(2, player.Level);
-        Assert.AreEqual(0, player.XP);
+        Assert.That(player.Level, Is.EqualTo(2));
+        Assert.That(player.XP, Is.EqualTo(0));
     }
 
     [Test]
@@ -41,8 +41,8 @@ public class Challenge01ReferenceTests
 
         player.AddXP(101);
 
-        Assert.AreEqual(2, player.Level);
-        Assert.AreEqual(1, player.XP);
+        Assert.That(player.Level, Is.EqualTo(2));
+        Assert.That(player.XP, Is.EqualTo(1));
     }
 
     [Test]
@@ -52,8 +52,8 @@ public class Challenge01ReferenceTests
 
         player.AddXP(250);
 
-        Assert.AreEqual(3, player.Level);
-        Assert.AreEqual(0, player.XP);
+        Assert.That(player.Level, Is.EqualTo(3));
+        Assert.That(player.XP, Is.EqualTo(0));
     }
 
     [Test]
@@ -63,8 +63,8 @@ public class Challenge01ReferenceTests
 
         player.AddXP(450);
 
-        Assert.AreEqual(4, player.Level);
-        Assert.AreEqual(0, player.XP);
+        Assert.That(player.Level, Is.EqualTo(4));
+        Assert.That(player.XP, Is.EqualTo(0));
     }
 
     [Test]
@@ -74,8 +74,8 @@ public class Challenge01ReferenceTests
 
         player.AddXP(1000);
 
-        Assert.AreEqual(6, player.Level);
-        Assert.AreEqual(0, player.XP);
+        Assert.That(player.Level, Is.EqualTo(6));
+        Assert.That(player.XP, Is.EqualTo(0));
     }
 
     [Test]
@@ -83,8 +83,9 @@ public class Challenge01ReferenceTests
     {
         var player = new PlayerProgressionReference();
 
-        Assert.Throws<ArgumentOutOfRangeException>(
-            () => player.AddXP(-10));
+        Assert.That(
+            () => player.AddXP(-10),
+            Throws.TypeOf<ArgumentOutOfRangeException>());
     }
 
     [Test]
@@ -94,16 +95,11 @@ public class Challenge01ReferenceTests
 
         player.AddXP(50);
 
-        try
-        {
-            player.AddXP(-10);
-        }
-        catch (ArgumentOutOfRangeException)
-        {
-            // Expected exception.
-        }
+        Assert.That(
+            () => player.AddXP(-10),
+            Throws.TypeOf<ArgumentOutOfRangeException>());
 
-        Assert.AreEqual(1, player.Level);
-        Assert.AreEqual(50, player.XP);
+        Assert.That(player.Level, Is.EqualTo(1));
+        Assert.That(player.XP, Is.EqualTo(50));
     }
 }
