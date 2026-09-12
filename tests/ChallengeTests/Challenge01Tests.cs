@@ -1,6 +1,6 @@
 using NUnit.Framework;
 
-public class Challenge01Tests
+public class Challenge01CandidateATests
 {
     [Test]
     public void Level1_With99XP_ShouldNotLevelUp()
@@ -9,8 +9,8 @@ public class Challenge01Tests
 
         player.AddXP(99);
 
-        Assert.AreEqual(1, player.Level);
-        Assert.AreEqual(99, player.XP);
+        Assert.That(player.Level, Is.EqualTo(1));
+        Assert.That(player.XP, Is.EqualTo(99));
     }
 
     [Test]
@@ -20,8 +20,8 @@ public class Challenge01Tests
 
         player.AddXP(100);
 
-        Assert.AreEqual(2, player.Level);
-        Assert.AreEqual(0, player.XP);
+        Assert.That(player.Level, Is.EqualTo(2));
+        Assert.That(player.XP, Is.EqualTo(0));
     }
 
     [Test]
@@ -31,30 +31,8 @@ public class Challenge01Tests
 
         player.AddXP(101);
 
-        Assert.AreEqual(2, player.Level);
-        Assert.AreEqual(1, player.XP);
-    }
-
-    [Test]
-    public void Level1_With250XP_ShouldReachLevel3()
-    {
-        var player = new PlayerProgression();
-
-        player.AddXP(250);
-
-        Assert.AreEqual(3, player.Level);
-        Assert.AreEqual(0, player.XP);
-    }
-
-    [Test]
-    public void Level1_With450XP_ShouldReachLevel4()
-    {
-        var player = new PlayerProgression();
-
-        player.AddXP(450);
-
-        Assert.AreEqual(4, player.Level);
-        Assert.AreEqual(0, player.XP);
+        Assert.That(player.Level, Is.EqualTo(2));
+        Assert.That(player.XP, Is.EqualTo(1));
     }
 
     [Test]
@@ -65,7 +43,31 @@ public class Challenge01Tests
         player.AddXP(50);
         player.AddXP(-10);
 
-        Assert.AreEqual(1, player.Level);
-        Assert.AreEqual(50, player.XP);
+        Assert.That(player.Level, Is.EqualTo(1));
+        Assert.That(player.XP, Is.EqualTo(50));
+    }
+
+    [Test]
+    [Explicit("Defect reproduction: Candidate A cannot process multiple level-ups.")]
+    public void Level1_With250XP_ShouldReachLevel3()
+    {
+        var player = new PlayerProgression();
+
+        player.AddXP(250);
+
+        Assert.That(player.Level, Is.EqualTo(3));
+        Assert.That(player.XP, Is.EqualTo(0));
+    }
+
+    [Test]
+    [Explicit("Defect reproduction: Candidate A cannot process multiple level-ups.")]
+    public void Level1_With450XP_ShouldReachLevel4()
+    {
+        var player = new PlayerProgression();
+
+        player.AddXP(450);
+
+        Assert.That(player.Level, Is.EqualTo(4));
+        Assert.That(player.XP, Is.EqualTo(0));
     }
 }
